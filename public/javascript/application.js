@@ -19,7 +19,8 @@ $(function() {
       display(data);
         }
       });
-      
+    });
+
     function getEpisode(id) {
       var url = ['https://itunes.apple.com/lookup?id=', id].join('');
 
