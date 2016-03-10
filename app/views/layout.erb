@@ -8,6 +8,7 @@
   -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <link rel="stylesheet" href="/stylesheets/normalize.css">
+  <link rel="stylesheet" href="/stylesheets/nav.css">
   <!--
     application.css is where you put your styles
   -->
@@ -19,6 +20,14 @@
   <title></title>
 </head>
 <body>
+  <div id='cssmenu' class="navbar-fixed-top">
+  <ul>
+     <li><a href='#' id="btn"><span>Top 10</span></a></li>
+     <li><a href='#'><span>Search</span></a></li>
+     <li><a href='#'><span>Genres</span></a></li>
+     <li class='last'><a href='#'><span>Contact</span></a></li>
+  </ul>
+  </div>
   <%= yield %>
 </body>
 </html>
