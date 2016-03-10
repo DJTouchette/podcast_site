@@ -95,7 +95,8 @@ $(function() {
       itunes.text( 'Check it out on Itunes' );
       itunes.attr( 'href', dr.collectionViewUrl );
       img.attr( 'src', dr.artworkUrl600 );
-      
+      genre.text(dr.primaryGenreName);
+
 
       $(divRow).appendTo('#main-screen');
       $(divCol4).appendTo(divRow);
@@ -103,6 +104,7 @@ $(function() {
       $(divCol8).appendTo(divRow);
       $(title).appendTo(divCol8);
       $(artist).appendTo(divCol8);
+      $(genre).appendTo(divCol8);
       $(itunes).appendTo(divCol8);
 
 
