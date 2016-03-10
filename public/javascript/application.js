@@ -133,22 +133,57 @@ $(function() {
             if (i == 1317){
               i = 1318;
             }
-
-
-        }
-        // $('#main-screen').empty();
-        $.ajax({
-          url:'https://itunes.apple.com/ca/rss/toppodcasts/limit=12/explicit=true/json',
-          dataType: 'json',
-          success: function(data){
-          display(data);
+            if (i == 1319){
+              i = 1321;
             }
-          });
+            if (i == 1322){
+              i = 1323;
+            }
 
-          // 1301 1321 1303 1304 1323 1325 1307 1305 1310 1311 1314 1315 1324 1316 1318 1309
+            var url = ['https://itunes.apple.com/us/rss/toppodcasts/limit=2/genre=', i, '/explicit=true/json'].join('');
 
-
+            $.ajax({
+              url: url,
+              dataType: 'json',
+              success: function (data) {
+              genreShow(data);
+                }
+              });
+        }
       }
 
+      $('#genre').on('click', function (){
+        $('#main-screen').empty();
+        genre();
+      });
+
+      function genreShow(data) {
+        var dfe = data.feed.entry;
+          for (var i = 0; i < data.feed.entry.length; i++ ) {
+
+            var divCol4 = $('<div>').attr('class', 'col-xs-4');
+            var img = $('<img>').attr('class', 'podimg');
+            var id = $('<data-id>');
+            var genre = $('<h3>');
+
+            var url = dfe[i]['im:image'][1].label.slice(0, (dfe[i]['im:image'][1].label.length - 14));
+            var urlDone = [url, '500x500.jpg'].join('');
+
+            var text = data.feed.title.label.slice(13, data.feed.title.label.length);
+            genre.text(text);
+            img.attr( 'src', urlDone );
+            img.attr( 'data-id', dfe[i].id.attributes['im:id']);
+            console.log(dfe[i].id.attributes['im:id']);
+
+            $(divCol4).appendTo('#main-screen');
+            $(img).appendTo(divCol4);
+            $(genre).appendTo(divCol4);
+          }
+
+          $( ".podimg" ).on('click', function () {
+            var id = $(this).attr('data-id');
+            getEpisode(id);
+          });
+      }
 
 });

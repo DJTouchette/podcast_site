@@ -37,9 +37,14 @@ body {
   right: 900px;
   margin: 10px 0;
 
-
 }
+
 
 * {
   /*border: 1px solid red;*/
+}
+
+.col-xs-4 {
+  text-align: center;
+  color: white;
 }
