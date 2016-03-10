@@ -1,5 +1,5 @@
 $(function() {
-  
+
   function browse(){
     $.ajax({
       url:'https://itunes.apple.com/us/rss/toppodcasts/limit=100/json',
@@ -110,6 +110,42 @@ $(function() {
               var id = $(this).attr('data-id');
               getEpisode(id);
             });
+
+      }
+
+      function genre() {
+        for(var i = 1301; i < 1326; i++){
+            if (i == 1302) {
+              i = 1303;
+            }
+            if (i == 1302) {
+              i = 1303;
+            }
+            if (i == 1306) {
+              i = 1307;
+            }
+            if (i == 1308){
+              i = 1309;
+            }
+            if (i == 1312){
+              i = 1314;
+            }
+            if (i == 1317){
+              i = 1318;
+            }
+
+
+        }
+        // $('#main-screen').empty();
+        $.ajax({
+          url:'https://itunes.apple.com/ca/rss/toppodcasts/limit=12/explicit=true/json',
+          dataType: 'json',
+          success: function(data){
+          display(data);
+            }
+          });
+
+          // 1301 1321 1303 1304 1323 1325 1307 1305 1310 1311 1314 1315 1324 1316 1318 1309
 
 
       }
