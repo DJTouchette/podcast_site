@@ -2,16 +2,18 @@
   height: 100%;
   width: 100%;
   border-radius: 100%;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   display: block;
   cursor: pointer;
+  -webkit-box-shadow: -11px 9px 165px -1px rgba(0,0,0,0.75);
 
 }
 
 body {
-  background: #4B79A1; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #4B79A1 , #283E51); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to left, #4B79A1 , #283E51); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  background: #304352; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #304352 , #d7d2cc); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #304352 , #d7d2cc); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: cover;
   padding-top: 70px;
 }
@@ -25,12 +27,14 @@ body {
 }
 
 .podimgEpisode {
+  -webkit-box-shadow: -11px 9px 165px -1px rgba(0,0,0,0.75);
   height: 100%;
   width: 100%;
   border-radius: 100%;
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   display: block;
   right: 900px;
+
 
 }
 

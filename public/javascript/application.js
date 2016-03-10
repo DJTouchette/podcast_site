@@ -1,11 +1,20 @@
 $(function() {
+  
+  function browse(){
+    $.ajax({
+      url:'https://itunes.apple.com/us/rss/toppodcasts/limit=100/json',
+      dataType: 'json',
+      success: function(data){
+        display(data);
+        }
+      });
+    }
 
-  $.ajax({
-    url:'https://itunes.apple.com/us/rss/toppodcasts/limit=100/json',
-    dataType: 'json',
-    success: function(data){
-      display(data);
-      }
+    browse();
+
+    $('#browse').on('click', function(){
+      $('#main-screen').empty();
+      browse();
     });
 
   var btn = $('#btn');
@@ -104,11 +113,6 @@ $(function() {
 
 
       }
-
-
-
-
-
 
 
 });
