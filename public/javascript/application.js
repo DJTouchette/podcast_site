@@ -56,6 +56,7 @@ $(function() {
       var genre = $('<h4>');
       var summaryTag = $('<p>');
 
+      divCol8.attr('id', 'text');
       summaryTag.text( summaryEpisode );
       title.text( dr.collectionCensoredName );
       artist.text( dr.artistName );
