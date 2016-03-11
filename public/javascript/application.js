@@ -1,5 +1,18 @@
 $(function() {
 
+  var backgroundUrl = 'https://source.unsplash.com/random/1920 x 1080';
+
+  function background (){
+    $.ajax({
+      url: backgroundUrl ,
+      dataType: 'json',
+      success: function(data){
+        display(data);
+        }
+      });
+    $('body').css('background', 'url(' + backgroundUrl + ')');
+  }
+
   function browse(){
     $.ajax({
       url:'https://itunes.apple.com/us/rss/toppodcasts/limit=90/json',
