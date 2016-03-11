@@ -2,7 +2,7 @@ $(function() {
 
   function browse(){
     $.ajax({
-      url:'https://itunes.apple.com/us/rss/toppodcasts/limit=100/json',
+      url:'https://itunes.apple.com/us/rss/toppodcasts/limit=90/json',
       dataType: 'json',
       success: function(data){
         display(data);
@@ -30,20 +30,20 @@ $(function() {
       });
     });
 
-    function getEpisode(id) {
+    function getEpisode(id, summary) {
       var url = ['https://itunes.apple.com/lookup?id=', id].join('');
-
       $.ajax({
         url: url,
         dataType: 'jsonp',
         success: function(data){
-          episodeScreen(data);
+          episodeScreen(data,summary);
           }
         });
     }
 
-    function episodeScreen(data) {
+    function episodeScreen(data, summary) {
       var dr = data.results[0];
+      var summaryEpisode = summary;
       $('#main-screen').empty();
 
       var divCol8 = $('<div>').attr('class', 'col-xs-6');
@@ -54,7 +54,9 @@ $(function() {
       var title = $('<h2>');
       var itunes = $('<a>');
       var genre = $('<h4>');
+      var summaryTag = $('<p>');
 
+      summaryTag.text( summaryEpisode );
       title.text( dr.collectionCensoredName );
       artist.text( dr.artistName );
       itunes.text( 'Check it out on Itunes' );
@@ -69,8 +71,8 @@ $(function() {
       $(title).appendTo(divCol8);
       $(artist).appendTo(divCol8);
       $(genre).appendTo(divCol8);
+      $(summaryTag).appendTo(divCol8);
       $(itunes).appendTo(divCol8);
-
 
     }
 
@@ -101,14 +103,15 @@ $(function() {
 
               img.attr( 'src', urlDone );
               img.attr( 'data-id', dfe[i].id.attributes['im:id']);
-              console.log(dfe[i].id.attributes['im:id']);
+              img.attr( 'data-summary', dfe[i].summary.label );
 
               $(divCol4).appendTo('#main-screen');
               $(img).appendTo(divCol4);
             }
             $( ".podimg" ).on('click', function () {
               var id = $(this).attr('data-id');
-              getEpisode(id);
+              var summary = $(this).attr('data-summary');
+              getEpisode(id, summary);
             });
 
       }
@@ -173,7 +176,6 @@ $(function() {
             genre.text(text);
             img.attr( 'src', urlDone );
             img.attr( 'data-id', dfe[i].id.attributes['im:id']);
-            console.log(dfe[i].id.attributes['im:id']);
 
             $(divCol4).appendTo('#main-screen');
             $(img).appendTo(divCol4);
@@ -182,7 +184,8 @@ $(function() {
 
           $( ".podimg" ).on('click', function () {
             var id = $(this).attr('data-id');
-            getEpisode(id);
+            var summary = $(this).attr('data-summary');
+            getEpisode(id, summary);
           });
       }
 
