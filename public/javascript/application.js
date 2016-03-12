@@ -12,14 +12,14 @@ $(function() {
 
     browse();
 
-    $('#browse').on('click', function(){
+    $('#browse').on('click tap', function(){
       $('#main-screen').empty();
       browse();
     });
 
   var btn = $('#btn');
 
-  btn.on('click', function () {
+  btn.on('click tap', function () {
     $('#main-screen').empty();
     $.ajax({
       url:'https://itunes.apple.com/ca/rss/toppodcasts/limit=12/explicit=true/json',
@@ -46,10 +46,9 @@ $(function() {
       var summaryEpisode = summary;
       $('#main-screen').empty();
 
-      var divCol8 = $('<div>').attr('class', 'col-xs-6');
-      var divCol4 = $('<div>').attr('class', 'col-xs-6');
-      var divRow = $('<div>').attr('class', 'row');
-      var img = $('<img>').attr('class', 'podimgEpisode');
+      var divCol8 = $('<div>').attr('class', 'col-xs-12 col-md-6');
+      var divCol4 = $('<div>').attr('class', 'col-xs-12 col-md-6');
+      var img = $('<img>');
       var artist = $('<h1>');
       var title = $('<h2>');
       var itunes = $('<a>');
@@ -57,18 +56,20 @@ $(function() {
       var summaryTag = $('<p>');
 
       divCol8.attr('id', 'text');
+
       summaryTag.text( summaryEpisode );
       title.text( dr.collectionCensoredName );
       artist.text( dr.artistName );
       itunes.text( 'Check it out on Itunes' );
       itunes.attr( 'href', dr.collectionViewUrl );
       img.attr( 'src', dr.artworkUrl600 );
-      genre.text(dr.primaryGenreName);
+      img.attr( 'class', 'podimgEpisode' );
+      genre.text( dr.primaryGenreName );
 
-      $(divRow).appendTo('#main-screen');
-      $(divCol4).appendTo(divRow);
+      $(divCol4).appendTo('#main-screen');
       $(divCol4).prepend(img);
-      $(divCol8).appendTo(divRow);
+      $(divCol8).appendTo('#main-screen');
+
       $(title).appendTo(divCol8);
       $(artist).appendTo(divCol8);
       $(genre).appendTo(divCol8);
@@ -77,7 +78,7 @@ $(function() {
 
     }
 
-    $('#search').on('click', function(event){
+    $('#search').on('click tap', function (event){
       event.preventDefault();
       searchTerm = $('#search-term').val().replace(' ', '+');
       var url = ['https://itunes.apple.com/search?term=', searchTerm,'&country=ca&entity=podcast'].join('');
@@ -95,7 +96,7 @@ $(function() {
           var dfe = data.feed.entry;
             for (var i = 0; i < data.feed.entry.length; i++ ) {
 
-              var divCol4 = $('<div>').attr('class', 'col-xs-4');
+              var divCol4 = $('<div>').attr('class', 'col-xs-4 col-md-2');
               var img = $('<img>').attr('class', 'podimg');
               var id = $('<data-id>');
 
@@ -109,7 +110,7 @@ $(function() {
               $(divCol4).appendTo('#main-screen');
               $(img).appendTo(divCol4);
             }
-            $( ".podimg" ).on('click', function () {
+            $( ".podimg" ).on('click tap', function () {
               var id = $(this).attr('data-id');
               var summary = $(this).attr('data-summary');
               getEpisode(id, summary);
@@ -156,7 +157,7 @@ $(function() {
         }
       }
 
-      $('#genre').on('click', function (){
+      $('#genre').on('click tap', function (){
         $('#main-screen').empty();
         genre();
       });
@@ -165,7 +166,7 @@ $(function() {
         var dfe = data.feed.entry;
           for (var i = 0; i < data.feed.entry.length; i++ ) {
 
-            var divCol4 = $('<div>').attr('class', 'col-xs-4');
+            var divCol4 = $('<div>').attr('class', 'col-xs-4 col-md-2');
             var img = $('<img>').attr('class', 'podimg');
             var id = $('<data-id>');
             var genre = $('<h3>');
@@ -177,17 +178,24 @@ $(function() {
             genre.text(text);
             img.attr( 'src', urlDone );
             img.attr( 'data-id', dfe[i].id.attributes['im:id']);
+            genre.attr('id', 'text');
 
             $(divCol4).appendTo('#main-screen');
             $(img).appendTo(divCol4);
             $(genre).appendTo(divCol4);
           }
 
-          $( ".podimg" ).on('click', function () {
+          $( ".podimg" ).on('click tap', function () {
             var id = $(this).attr('data-id');
             var summary = $(this).attr('data-summary');
             getEpisode(id, summary);
           });
       }
+
+      $('#rdm li').on('tap', function () {
+        setTimeout(function(){
+          $('#drop-down').click();
+        }, 1000);
+      });
 
 });
